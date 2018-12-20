@@ -67,10 +67,21 @@ Projects Form styles
     flex-direction: column;
     width: 55%;
     margin: auto;
+
 }
 
 .form-input {
-    padding: 4px;
-    font-size: .8em
+    padding: 8px;
+    font-size: .8em;
+    margin-top: 8px;
+
 }
+
+.form-btn {
+    width: 64px;
+    margin-left: 304px;
+    margin-top: 8px;
+
+}
+
 

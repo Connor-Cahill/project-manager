@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
@@ -9,6 +10,10 @@ const app = express();
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/project-manager', { useNewUrlParser: true });
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error'))
 mongoose.Promise = global.Promise;
+
+//Middleware Setup
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 ///Setup handlebars view engine
 app.use(express.static('public'))
