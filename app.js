@@ -15,6 +15,7 @@ app.use(express.static('public'))
 app.engine('hbs', exphbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
-
+///Setup controllers:
+require('./controllers/projects')(app);
 
 app.listen(3000, () => console.log('App listening on port 3000'));
