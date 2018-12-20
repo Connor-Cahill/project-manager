@@ -1,0 +1,76 @@
+/* ---
+Main Layout Styles
+(nav, body, etc.) 
+---*/
+
+.nav-container {
+    width: 100%;
+    margin: 0px;
+    border-bottom: solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.nav-btn {
+    margin-right: 8px;
+    border: solid black;
+    padding: 8px;
+    font-size: .8em;
+    text-decoration: none;
+}
+
+.nav-btn:active {
+    text-decoration: none;
+}
+
+
+
+/* ---
+Projects index styles 
+---*/
+
+.projects-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+    border: solid black;
+    padding: 16px;
+    width: 356px;
+    margin-top: 32px;
+}
+
+
+/* ---
+Projects Form styles 
+---*/
+
+.form-container {
+    margin: auto;
+    margin-top: 208px;
+    border: solid black;
+    padding: 16px;
+    padding-bottom: 80px;
+    width: 50%;
+}
+
+.projects-form {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    margin: auto;
+}
+
+.form-input {
+    padding: 4px;
+    font-size: .8em
+}
+
