@@ -84,4 +84,19 @@ Projects Form styles
 
 }
 
+/* ---
+Styling For Projects on Index page
+---*/
+
+.project-card {
+  display: flex;
+  flex-direction: column; 
+
+}
+
+.project-name {
+    margin-bottom: -8px;
+}
+
+
 
