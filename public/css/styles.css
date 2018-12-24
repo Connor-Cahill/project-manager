@@ -98,5 +98,44 @@ Styling For Projects on Index page
     margin-bottom: -8px;
 }
 
+/* ---
+Styling for Auth Forms (sign in && sign up)
+---------------*/
 
 
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.auth-header {
+    margin-bottom: 0px;
+}
+
+.auth-byline {
+    margin-top: 0px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+
+}
+
+.auth-input {
+    width: 200px;
+    padding: 8px;
+    font-size: 1em;
+}
+
+.label-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 200px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}

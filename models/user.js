@@ -19,26 +19,15 @@ const UserSchema = new Schema({
 
 })
 
-UserSchema.pre('save', function(next) {
-    this.updatedAt = new Date();
-    if (!this.type) {
-        this.type = 'user';
 
-        if (!this.isModified('password')) {
-            return next();
-        }
 
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(this.password, salt, (error, hash) => {
-                this.password = hash;
-                next();
-            });
-        });
-    }
-});
-
+///Generate Hash for password
+UserSchema.methods.generateHash = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+//compares the password against the hash
 UserSchema.methods.comparePassword = function(password, done) {
-    bcrypt.compare(password, this.password, done);
+    return bcrypt.compareSync(password, this.password);
 }
 
 
