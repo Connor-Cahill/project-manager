@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date },
-    username: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     ideas: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
     brainstorming: [{ type: Schema.Types.ObjectId, ref: 'Project' }],

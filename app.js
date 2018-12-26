@@ -28,5 +28,6 @@ app.set('view engine', 'hbs');
 ///Setup controllers: 
 require('./controllers/projects')(app);
 require('./controllers/auth')(app);
+require('./controllers/users')(app);
 
 app.listen(3000, () => console.log('App listening on port 3000'));
