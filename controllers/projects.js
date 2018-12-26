@@ -1,28 +1,41 @@
 const Project = require('../models/project');
-
+const User = require('../models/user');
 
 module.exports = function(app) {
 
 
-    //GET: renders the home page with list of projects (all projects view)
-    //NOTE this may change later depending on how I set up landing page and auth 
+    //GET: renders the dashboard where all of a users projects can be viewed
     app.get('/', (req, res) => {
-        const currentUser = req.user;
-        Project.find({}).then(projects => {
-            res.render('index', { projects, currentUser })
+        if (req.user) {
+            User.findById(req.user._id).populate('ideas')
+        .populate('brainstorming')
+        .populate('development')
+        .populate('debugging')
+        .populate('production')
+        .populate('enhancements')
+        .then(user => {
+            res.render('index', { user })
         }).catch(err => {
-            console.log(err)
+            console.log(err);
         })
+        } else {
+            res.redirect('signup')
+            console.log('User must be logged in.')
+        }
+        
     })
+
     //POST: creates a new project and saves it to the database 
     //NOTE TODO:  Will need to save this to user once users/auth is all setup 
     app.post('/projects', (req, res) => {
         const project = new Project(req.body);
 
         project.save().then(project => {
-            res.redirect('/');
-
-
+            return User.findById(req.user._id)
+        }).then(user => {
+            user.ideas.unshift(project);
+            user.save();
+            return res.redirect(`/projects/${project._id}`);
         }).catch(err => {
             console.log(err);
         })

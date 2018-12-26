@@ -2,12 +2,16 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const checkAuth = require('./middleware/checkAuth');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
 
 //Middleware Setup
+app.use(cookieParser());
+app.use(checkAuth);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
