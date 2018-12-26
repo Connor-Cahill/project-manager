@@ -7,8 +7,9 @@ module.exports = function(app) {
     //GET: renders the home page with list of projects (all projects view)
     //NOTE this may change later depending on how I set up landing page and auth 
     app.get('/', (req, res) => {
+        const currentUser = req.user;
         Project.find({}).then(projects => {
-            res.render('index', { projects })
+            res.render('index', { projects, currentUser })
         }).catch(err => {
             console.log(err)
         })
@@ -34,8 +35,9 @@ module.exports = function(app) {
 
     //GET: renders single project page 
     app.get('/projects/:id', (req, res) => {
+        const currentUser = req.user;
         Project.findById(req.params.id).then(project => {
-            res.render('project-show', { project: project });
+            res.render('project-show', { project, currentUser });
         }).catch(err => {
             console.log(err);
         })
