@@ -4,9 +4,9 @@
 
     <div class="section-container">
         <h3 class="section-header">Ideas:</h3>
-            {{#each user.ideas}}
+            {{#each ideas}}
                 <div class="project-card">
-                    <h3 class='project-name'>{{this.name}}</h3>
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
                     <p class="project-description">{{this.description}}</p>
                 </div>
             {{/each}}
@@ -14,23 +14,48 @@
     </div>
     <div class="section-container">
         <h3 class="section-header">Brainstorming:</h3>
-
+        {{#each brainstorming}}
+                <div class="project-card">
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
+                    <p class="project-description">{{this.description}}</p>
+                </div>
+            {{/each}}
     </div>
     <div class="section-container">
         <h3 class="section-header">Development:</h3>        
-
+        {{#each development}}
+                <div class="project-card">
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
+                    <p class="project-description">{{this.description}}</p>
+                </div>
+            {{/each}}
     </div>
     <div class="section-container">
         <h3 class="section-header">Debugging:</h3>
-
+        {{#each debugging}}
+                <div class="project-card">
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
+                    <p class="project-description">{{this.description}}</p>
+                </div>
+            {{/each}}
     </div>
     <div class="section-container">
         <h3 class="section-header">Production:</h3>
-
+        {{#each production}}
+                <div class="project-card">
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
+                    <p class="project-description">{{this.description}}</p>
+                </div>
+            {{/each}}
     </div>
     <div class="section-container">
         <h3 class="section-header">Enhancements:</h3>
-
+        {{#each enhancements}}
+                <div class="project-card">
+                    <h3 class='project-name'><a class="project-name-link" href="/projects/{{this._id}}">{{this.name}}</a></h3>
+                    <p class="project-description">{{this.description}}</p>
+                </div>
+            {{/each}}
     </div>
 
 </div>

@@ -10,13 +10,7 @@ const UserSchema = new Schema({
     updatedAt: { type: Date },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    ideas: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    brainstorming: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    development: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    debugging: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    production: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-    enhancements: [{ type: Schema.Types.ObjectId, ref: 'Project' }]
-
+    projects: [{ type: Schema.Types.ObjectId, ref: 'Project'}]
 })
 
 

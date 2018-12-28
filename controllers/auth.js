@@ -37,7 +37,7 @@ module.exports = function(app) {
 
     //POST: Signs user in if credentials are correct
     app.post('/signin', (req, res) => {
-        User.findOne({ username: req.body.username }, 'username password').then(user => {
+        User.findOne({$or: [{ username: req.body.username }, { email: req.body.username }]  }, 'username email password').then(user => {
             console.log('this is the user ==>', user);
             if (!user) {
                 console.log('This is an incorrect username')

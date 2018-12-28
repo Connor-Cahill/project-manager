@@ -1,0 +1,20 @@
+
+<div class="project-show-container">
+    <h2 class="project-show-header">{{project.name}}</h2>
+    <div class="project-desc-container">
+        <p class="project-show-desc">{{project.description}}</p>
+    </div>
+    <p class="show-repoLink">{{ project.repoLink }}</p>
+    <form action="/projects/{{project._id}}/change-stage?_method=PATCH" method="post" class="stage-form">
+        <select name="stage" class="stage-selector">
+            <option value="ideas">Idea</option>
+            <option value="brainstorming">Brainstorming</option>
+            <option value="development">Development</option>
+            <option value="debugging">Debugging</option>
+            <option value="production">Production</option>
+            <option value="enhancements">Enhancements</option>
+        </select>
+        <button class="stage-change-btn" type="submit">Update</button>
+    </form>
+
+</div>

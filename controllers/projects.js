@@ -1,39 +1,54 @@
 const Project = require('../models/project');
 const User = require('../models/user');
+const isUserAuth = require('../middleware/isUserAuthed');
 
 module.exports = function(app) {
 
 
     //GET: renders the dashboard where all of a users projects can be viewed
-    app.get('/', (req, res) => {
-        if (req.user) {
-            User.findById(req.user._id).populate('ideas')
-        .populate('brainstorming')
-        .populate('development')
-        .populate('debugging')
-        .populate('production')
-        .populate('enhancements')
-        .then(user => {
-            res.render('index', { user })
+    //TODO---> Add check auth middleware 
+    app.get('/', isUserAuth, (req, res) => {
+        User.findById(req.user._id).populate('projects').then(user => {
+            const ideas = [];
+            const brainstorming = [];
+            const development = [];
+            const debugging = [];
+            const production = [];
+            const enchancements = [];
+
+
+            user.projects.forEach(function(project) {
+                if (project.stage === 'ideas') {
+                    ideas.unshift(project);
+                } else if (project.stage === 'brainstorming') {
+                    brainstorming.unshift(project);
+                } else if (project.stage === 'development') {
+                    development.unshift(project);
+                } else if ( project.stage === 'debugging') {
+                    debugging.unshift(project);
+                } else if (project.stage === 'production') {
+                    production.unshift(project);
+                } else if (project.stage === 'enhancements') {
+                    enchancements.unshift(project);
+                }
+            })
+            return res.render('index', { user: user, ideas: ideas, brainstorming: brainstorming, development: development, debugging: debugging, production: production, enchancements: enchancements } )
+
         }).catch(err => {
             console.log(err);
         })
-        } else {
-            res.redirect('signup')
-            console.log('User must be logged in.')
-        }
-        
     })
 
     //POST: creates a new project and saves it to the database 
     //NOTE TODO:  Will need to save this to user once users/auth is all setup 
     app.post('/projects', (req, res) => {
         const project = new Project(req.body);
-
+        project.author = req.user._id;
+        project.stage = 'ideas'
         project.save().then(project => {
             return User.findById(req.user._id)
         }).then(user => {
-            user.ideas.unshift(project);
+            user.projects.unshift(project);
             user.save();
             return res.redirect(`/projects/${project._id}`);
         }).catch(err => {
@@ -50,7 +65,7 @@ module.exports = function(app) {
     app.get('/projects/:id', (req, res) => {
         const currentUser = req.user;
         Project.findById(req.params.id).then(project => {
-            res.render('project-show', { project, currentUser });
+            res.render('projects-show', { project, currentUser });
         }).catch(err => {
             console.log(err);
         })
@@ -73,6 +88,21 @@ module.exports = function(app) {
         }).then(updatedProject => {
             console.log(updatedProject);
             res.redirect(`/projects/${req.params.id}`);
+        }).catch(err => {
+            console.log(err);
+        })
+    })
+
+
+    //PATCH: this route changes the stage of a project with the given stage. 
+    app.patch('/projects/:id/change-stage', (req, res) => {
+        const stage = req.body.stage;
+        Project.findById(req.params.id).then(project => {
+            project.set({ stage: stage });
+            return project.save();
+        }).then(project => {
+            res.redirect(`/projects/${project._id}`);
+
         }).catch(err => {
             console.log(err);
         })
